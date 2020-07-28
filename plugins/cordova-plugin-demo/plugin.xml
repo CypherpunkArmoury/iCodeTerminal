@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+  xmlns:android="http://schemas.android.com/apk/res/android" id="cordova-plugin-demo" version="0.0.1">
+  <name>cordova-plugin-demo</name>
+  <description>Crododva demo plugin</description>
+  <license>Apache 2.0</license>
+  <keywords>cordova,plugin,system</keywords>
+
+  <js-module src="www/plugin.js" name="demo">
+    <clobbers target="cordova.plugins.demo" />
+  </js-module>
+  <platform name="android">
+    <config-file target="res/xml/config.xml" parent="/*">
+      <feature name="Demo">
+        <param name="android-package" value="com.example.Demo"/>
+      </feature>
+    </config-file>
+
+    <source-file src="src/android/Demo.java" target-dir="src/com/example/demo"/>
+    <config-file target="AndroidManifest.xml" parent="/manifest"></config-file>
+  </platform>
+</plugin>

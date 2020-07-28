@@ -1,0 +1,18 @@
+{
+  "cordova-plugin-whitelist": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-whitelist@1"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-demo": {
+    "source": {
+      "type": "local",
+      "path": "/mnt/sdb1/cordova/demo/node_modules/cordova-plugin-system"
+    },
+    "is_top_level": true,
+    "variables": {}
+  }
+}

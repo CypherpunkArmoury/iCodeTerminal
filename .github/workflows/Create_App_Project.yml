@@ -1,0 +1,61 @@
+name: Create Clean Project
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Create Project
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Log to tg
+      env:
+        chat_id: ${{ secrets.CHAT_ID }}
+        bot_token: ${{ secrets.TG_TOKEN }}
+      run: |-
+        curl -d chat_id=${chat_id} -d text="Build has Started..." https://api.telegram.org/bot${bot_token}/sendMessage
+
+
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '10.x'
+    
+    - run: npm install
+    
+    - name: Install cordova
+      run: |
+        sudo npm config set unsafe-perm true && \
+        sudo npm install -g cordova
+
+    - name: Create Project
+      run: |
+        cordova create icodeterm com.icode.term iCodeTerminal
+
+
+    - name: Change Directory
+      run: |
+        cd icodeterm
+
+
+    - name: Add android Platform
+      run: |
+        (cd icodeterm; cordova platforms add android)
+
+    - name: Add android Platform
+      run: |
+        (cd icodeterm; cordova plugin add https://github.com/petervojtek/cordova-plugin-shell-exec.git)
+
+
+    - name: Zip Current Directory
+      run: |
+        zip -r code.zip icodeterm/*
+
+    - name: Upload to TG
+      env:
+        chat_id: ${{ secrets.CHAT_ID }}
+        bot_token: ${{ secrets.TG_TOKEN }}
+      run: |
+        curl "https://api.telegram.org/bot${bot_token}/sendDocument?chat_id=${chat_id}" -F document=@"code.zip"
