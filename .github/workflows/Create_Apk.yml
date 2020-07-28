@@ -53,9 +53,6 @@ jobs:
       run: echo "::set-env name=BUILD_TYPE::debug"
     
     
-    - name: Add platform android
-      run: cordova platform add android
-    
 
     - name: Zip Current Folder for Bkp
       run: zip -r CodeBackup.zip *
