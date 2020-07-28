@@ -18,8 +18,7 @@
   },
   "cordova": {
     "plugins": {
-      "cordova-plugin-whitelist": {},
-      "cordova-plugin-demo": {}
+      "cordova-plugin-whitelist": {}
     },
     "platforms": [
       "android"
